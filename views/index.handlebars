@@ -6,11 +6,25 @@
     <p class="lead">
     </p>
 </div>
-<div id="articles"></div>
+
+<div class="container-fluid" id="articles">
+    {{#each articles}}
+  <div class="row">
+        <div class="col-md-12">
+            <h1>{{this.title}}</h1>
+            <h3>{{this.link}}</h3>
+            <p>{{this.summary}}</p>
+            <p>{{this._id}}</p>
+        </div>
+    </div>
+    {{/each}}
+</div>
+ 
+
 <div id="comments"></div>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 {{!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0/js/bootstrap.min.js"></script> --}}
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-<script src="app.js"></script>
+<script src="/public/app.js"></script>
 
