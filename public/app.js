@@ -2,19 +2,21 @@
 console.log("test");
 $.getJSON("/all", function(data) {
     // For each one
+    console.log(data);
     for (var i = 0; i < data.length; i++) {
       // Display the apropos information on the page
-      $("#articles").append("<p data-id='" + data[i]._id + "'>" + data[i].title + "<br />" + data[i].link + data[i].summary + "</p>");
+      $("#articles").append("<p data-id='" + data[i].id + "'>" + data[i].title + "<br />" + data[i].link + data[i].summary + "</p>");
     }
   });
   
   
   // Whenever someone clicks a p tag
-  $(document).on("click", "p", function() {
+  $(document).on("click", ".article", function() {
     // Empty the notes from the note section
     $("#comments").empty();
     // Save the id from the p tag
-    var thisId = $(this).attr("data-id");
+    var thisId = $(this).data("id")
+    console.log(thisId);
   
     // Now make an ajax call for the Article
     $.ajax({
@@ -25,9 +27,12 @@ $.getJSON("/all", function(data) {
       .then(function(data) {
         console.log(data);
         // The title of the article
+        var comments = $(div.comments)
+
         $("#comments").append("<h2>" + data.title + "</h2>");
+        
         // An input to enter a new title
-        $("#comments").append("<input id='titleinput' name='title' >");
+        // $("#comments").append("<input id='titleinput' name='title' >");
         // A textarea to add a new comment body
         $("#comments").append("<textarea id='bodyinput' name='body'></textarea>");
         // A button to submit a new comment, with the id of the article saved to it

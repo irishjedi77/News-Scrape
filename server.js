@@ -51,10 +51,11 @@ app.set("view engine", "handlebars");
 
 // Main route 
 app.get("/", function (req, res) {
-    // if (req.user) {
-    //     return res.render("index");
-    // }
-    res.render("index");
+    db.Article.find({}).then(data => {
+        console.log(data)
+
+        res.render("index", { articles: data });
+    })
 });
 
 
@@ -80,6 +81,7 @@ app.get("/all", function (req, res) {
                 .slice(12)
                 .split("\n")
                 .toString();
+                
 
             // In the currently selected element, look at its child elements (i.e., its a-tags),
             // then save the values for any "href" attributes that the child elements may have
@@ -100,7 +102,7 @@ app.get("/all", function (req, res) {
             db.Article.create(results)
                 .then(function (dbArticle) {
                     // View the added result in the console
-                    console.log(dbArticle);
+                    // console.log(dbArticle);
                 })
                 .catch(function (err) {
                     // If an error occurred, log it
