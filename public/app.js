@@ -11,14 +11,15 @@ $.getJSON("/all", function(data) {
   
   
   // Whenever someone clicks a p tag
-  $(document).on("click", ".article", function() {
+  $(document).on("click", "#articles", function() {
+    console.log("click fired");
     // Empty the notes from the note section
     $("#comments").empty();
     // Save the id from the p tag
-    var thisId = $(this).data("id")
+    var thisId = $(this).attr("data-id");
     console.log(thisId);
   
-    // Now make an ajax call for the Article
+    // Now make an ajax call for the Articles
     $.ajax({
       method: "GET",
       url: "/articles/" + thisId
